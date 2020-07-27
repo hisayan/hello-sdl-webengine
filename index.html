@@ -214,21 +214,22 @@
                   ]);
                   this._sdlManager.sendRpc(speak).catch(error => error);
                 }
-                if (onVehicleDataNotification.getRpm() !== null) {
-                  console.log(
-                    `RPM was updated to: ${onVehicleDataNotification.getRPM()}`
-                  );
-                  const RPM = Math.floor(onVehicleDataNotification.getRPM());
-                  // RPMを 表示
-                  screenManager.setTextField2(`只今のRPMは ${RPM} です`);
-                }
+                
+                // if (onVehicleDataNotification.getRpm() !== null) {
+                //   console.log(
+                //     `RPM was updated to: ${onVehicleDataNotification.getRpm()}`
+                //   );
+                //   const RPM = Math.floor(onVehicleDataNotification.getRpm());
+                //   // RPMを 表示
+                //   screenManager.setTextField2(`只今のRPMは ${RPM} です`);
+                // }
               }
             );
 
             // // 速度の変化を取得開始
-            const subscribeRequest = new SDL.rpc.messages.SubscribeVehicleData().setSpeed(
-              true
-            );
+            const subscribeRequest = new SDL.rpc.messages.SubscribeVehicleData()
+              .setSpeed(true);
+              // .setRpm(true);
             const response = await this._sdlManager
               .sendRpc(subscribeRequest)
               .catch(error => error);
@@ -244,25 +245,25 @@
             softButtonObjects[0].transitionToNextState();
             await this._sleep(2000);
 
-//             const count = 3;
-//             for (let i = 0; i < count; i++) {
-//               const showCountdown = new SDL.rpc.messages.Show();
-//               showCountdown
-//                 .setMainField1(`Exiting in ${(count - i).toString()}`)
-//                 .setMainField2("")
-//                 .setMainField3("");
+            //             const count = 3;
+            //             for (let i = 0; i < count; i++) {
+            //               const showCountdown = new SDL.rpc.messages.Show();
+            //               showCountdown
+            //                 .setMainField1(`Exiting in ${(count - i).toString()}`)
+            //                 .setMainField2("")
+            //                 .setMainField3("");
 
-//               this._sdlManager.sendRpc(showCountdown); // don't wait for a response
+            //               this._sdlManager.sendRpc(showCountdown); // don't wait for a response
 
-//               await this._sleep();
-//             }
+            //               await this._sleep();
+            //             }
 
-//             // tear down the app
-//             await this._sdlManager.sendRpc(
-//               new SDL.rpc.messages.UnregisterAppInterface()
-//             );
+            //             // tear down the app
+            //             await this._sdlManager.sendRpc(
+            //               new SDL.rpc.messages.UnregisterAppInterface()
+            //             );
 
-//             this._sdlManager.dispose();
+            //             this._sdlManager.dispose();
           }
         }
 
@@ -303,6 +304,6 @@
     </script>
   </head>
   <body>
-      You can open the developper tool on the chrome browser to debug this app.
+    You can open the developper tool on the chrome browser to debug this app.
   </body>
 </html>
